@@ -26,7 +26,6 @@ app.get("/graph", auth, (req, res) => {
 
 //Depo GET
 app.get("/depo", auth, async  (req, res) => {
-
     try {
         await fetch(`${api_adress}/api/getuser`, {
             method: 'post',
