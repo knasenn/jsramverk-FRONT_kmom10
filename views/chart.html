@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <title>Cake plotting</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script>
+    //connection
+    var socket = io.connect("http://localhost:4000");
+
+    var chartLoaded = false;
+    var histogram = [];
+
+    socket.on("korv", function(data){
+        google.charts.load('current', {packages: ['corechart', 'line']});
+        google.charts.setOnLoadCallback(drawLineColors);
+        histogram = data;
+        console.log(histogram);
+        function drawLineColors() {
+              var data = new google.visualization.DataTable();
+              data.addColumn('number', 'X');
+              data.addColumn('number', 'Korv');
+
+              data.addRows(
+                histogram
+              );
+
+              var options = {
+                // hAxis: {
+                //   title: 'Tid'
+                // },
+                vAxis: {
+                  title: 'Pris(sek)'
+                },
+                colors: ['#a52714', '#097138']
+              };
+
+              var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+              chart.draw(data, options);
+              var chartLoaded = true;
+
+            }
+    });
+    </script>
+</head>
+<body>
+    <div class="login-page-intro">
+            <div class="form-intro">
+                <main class="main" id="main">
+                    <h3>Real-time Stocks</h3>
+                    <div class="graphs" id="graphs"></div>
+                </main>
+                <div id="chart_div"></div>
+                <br>
+                <form action="depo" method="GET" class="login-form">
+                    <button type="submit">Depo</button>
+                </form>
+                <form action="logout" method="GET" class="login-form">
+                    <button type="submit">Logout</button>
+                </form>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</body>
+
+
+
+</html>

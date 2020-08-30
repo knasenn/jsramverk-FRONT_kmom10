@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <meta http-equiv="X-UA-Compatible" conent="ie=edge">
+    <title>app</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+</head>
+<body>
+    <div class="login-page-intro">
+        <div class="form-intro">
+            <h3>Priset för korv just nu</h3>
+            <h2><div id="output"><%= stockprice %> kr</div></h2>
+            <h4>saldo: <%= funds %> kr | Antal korvar: <%= stock %> st</h4>
+            <div class="form-intro">
+                <form action="depo" method="POST" class="login-form">
+                    <div>
+                        <input type="number" id="add_funds" name="add_funds" placeholder="Add funds">
+                    </div>
+                    <button type="submit_add_funds">Add</button>
+
+                    <div>
+                        <input type="number" id="buy" name="buy" placeholder="Buy">
+                    </div>
+                    <button type="submit_buy">buy</button>
+
+                    <div>
+                        <input type="number" id="sell" name="sell" placeholder="Sell">
+                    </div>
+                    <button type="submit_sell">sell</button>
+                </form>
+                <br>
+            </div>
+
+            <form action="graph" method="GET" class="login-form">
+                <button type="submit">Graph</button>
+            </form>
+            <form action="logout" method="GET" class="login-form">
+                <button type="submit">Logout</button>
+            </form>
+
+
+        </div>
+        <div class="graphs" id="graphs"></div>
+
+    </div>
+
+    <script src="/chat.js"></script>
+
+</body>
+
+
+
+</html>
